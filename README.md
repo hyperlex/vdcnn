@@ -10,5 +10,5 @@ Model parameters are initialized using the Xavier Glorot and Yoshua Bengio (2010
            http://www.jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf)
 
 Model trained and tested on a Tesla K80 gpu: 
-           - 32min per epoch 
-           - Test accuracy of 0.95 
+                    - 32min per epoch 
+                    - Test accuracy of 0.95 
