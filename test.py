@@ -75,7 +75,7 @@ with graph.as_default():
             feed_dict = {input_x: extendable_hdf5_file.root.data[ptr:ptr + batch_size], input_y: extendable_hdf5_file.root.clusters[ptr:ptr + batch_size] , is_training: False  }    
 
             y_true = tf.argmax(extendable_hdf5_file.root.clusters[ptr:ptr + batch_size] , 1)
-            y_true_bis,predictions_bis ,accuracy = sess.run([y_true,predictions,cnn.accuracy], feed_dict= feed_dict)    
+            y_true_bis,predictions_bis ,accuracy = sess.run([y_true,predictions,accuracy], feed_dict= feed_dict)    
             y_true_.extend(y_true_bis)
             predictions_.extend(predictions_bis)
 
