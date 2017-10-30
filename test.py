@@ -10,6 +10,18 @@ import datetime
 import tables
 from sklearn.metrics import f1_score,confusion_matrix
 
+# ====================== parameters ===========================
+
+tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
+tf.flags.DEFINE_boolean("log_device_placement", False, "Log placement of ops on devices")
+
+FLAGS = tf.flags.FLAGS
+FLAGS._parse_flags()
+
+print("\nParameters:")
+for attr, value in sorted(FLAGS.__flags.items()):
+    print("{}={}".format(attr.upper(), value))
+print("")
 
 
 # =====================  Preparation des données    =============================
@@ -60,7 +72,7 @@ with graph.as_default():
 
         for ptr in range(0, 70000, batch_size):
 
-            feed_dict = {cnn.input_x: extendable_hdf5_file.root.data[ptr:ptr + batch_size], cnn.input_y: extendable_hdf5_file.root.clusters[ptr:ptr + batch_size] , cnn.is_training: False  }    
+            feed_dict = {input_x: extendable_hdf5_file.root.data[ptr:ptr + batch_size], input_y: extendable_hdf5_file.root.clusters[ptr:ptr + batch_size] , is_training: False  }    
 
             y_true = tf.argmax(extendable_hdf5_file.root.clusters[ptr:ptr + batch_size] , 1)
             y_true_bis,predictions_bis ,accuracy = sess.run([y_true,predictions,cnn.accuracy], feed_dict= feed_dict)    
